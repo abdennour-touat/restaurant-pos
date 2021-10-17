@@ -2043,8 +2043,32 @@ function tillFilter(tills) {
     $("#tills").append(`<option value="${till}">${till}</option>`);
   });
 }
+
+//function to remove specific transaction
 $.fn.deleteTransaction = function (index) {
-  console.log(index);
+  let id = allTransactions[index];
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You are about to delete this transaction.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.value) {
+      $.ajax({
+        url: api + "transaction/delete",
+        type: "DELETE",
+        data: id,
+        success: function (data) {
+          getCurrentWindow().reload();
+          loadTransactions();
+          console.log(data);
+        },
+      });
+    }
+  });
 };
 $.fn.viewTransaction = function (index) {
   transaction_index = index;

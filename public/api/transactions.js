@@ -149,14 +149,25 @@ app.post("/delete", function (req, res) {
     }
   );
 });
+
+app.delete("/transaction/delete", function (req, res) {
+  console.log(req.body);
+  transactionsDB.remove(
+    {
+      _id: parseInt(req.body._id),
+    },
+    function (err, numRemoved) {
+      if (err) res.status(500).send(err);
+      else res.sendStatus(200);
+    }
+  );
+});
+
 app.delete("/transaction/deleteall", function (req, res) {
-  console.log("hello");
-  console.log(Inventory);
   transactionsDB.remove({}, { multi: true }, function (err, numRemoved) {
     if (err) res.status(500).send(err);
     else {
       res.sendStatus(200);
-      console.log(numRemoved);
     }
   });
 });

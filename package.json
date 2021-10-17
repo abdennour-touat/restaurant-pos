@@ -1,6 +1,6 @@
 {
   "name": "POS",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Point of sale",
   "author": "abdenour",
   "main": "./src/start.js",
@@ -66,3 +66,4 @@
     "nodemon": "^2.0.12"
   }
 }
+
