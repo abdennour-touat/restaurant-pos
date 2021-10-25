@@ -1,6 +1,6 @@
 {
   "name": "POS",
-  "version": "1.1.0",
+  "version": "1.1.0.32-bit",
   "description": "Point of sale",
   "author": "abdenour",
   "main": "./src/start.js",
@@ -44,7 +44,7 @@
   "scripts": {
     "electron": "cross-env NODE_ENV=dev nodemon --exec \"\"electron .\"\"",
     "build": "electron-builder build  --win --publish never",
-    "deploy": "electron-builder build  --win --publish always"
+    "deploy": "electron-builder build  --win --ia32 --publish always"
   },
   "browserslist": {
     "production": [
@@ -66,4 +66,3 @@
     "nodemon": "^2.0.12"
   }
 }
-
