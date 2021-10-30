@@ -54,9 +54,9 @@
                             <span class="btn-label"><i class="fa fa-shopping-basket"></i> </span> Open Tabs
                         </button>
 
-                     <!--   <button id="viewCustomerOrders" data-toggle="modal" data-target="#customerModal" type="button"-->
-                            <!--onclick="$(this).getCustomerOrders()" class="btn btn-info waves-effect waves-light">-->
-                            <!--<span class="btn-label"><i class="fa fa-user"></i> </span> Customer Orders-->
+                        <!--   <button id="viewCustomerOrders" data-toggle="modal" data-target="#customerModal" type="button"-->
+                        <!--onclick="$(this).getCustomerOrders()" class="btn btn-info waves-effect waves-light">-->
+                        <!--<span class="btn-label"><i class="fa fa-user"></i> </span> Customer Orders-->
                         <!--</button>-->
 
                     </div>
@@ -72,11 +72,11 @@
                         <button id="settings" data-toggle="modal" data-target="#settingsModal" type="button"
                             class="btn btn-default waves-effect waves-light p_five">
                             <i class="glyphicon glyphicon-cog"></i>
- 
-                        <button id="reset" data-toggle="modal" data-target="#resetModal" type="button"
-                            class="btn btn-danger waves-effect waves-light p_five">
-                          reset
-                        </button>                       </button>
+
+                            <button id="reset" data-toggle="modal" data-target="#resetModal" type="button"
+                                class="btn btn-danger waves-effect waves-light p_five">
+                                reset
+                            </button> </button>
 
                         <button id="transactions" type="button"
                             class="btn btn-default waves-effect waves-light p_three">
@@ -438,6 +438,37 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
+            <!-- modal for livraison or table -->
+            <div id='servType' class="modal fade bs-example-modal-sm" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+                style="display: none;">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myLargeModalLabel">Service Type</h4>
+                        </div>
+                        <div class="modal-body">
+
+                                            <form action="">
+                                                <input type="text" id="Table_Number" placeholder="Enter Table number"
+                                                    class="form-control">
+                                        <div class="modal-footer">
+                                            <button type="button" onclick="$(this).submitServiceType(0);"
+                                                class="btn btn-success btn-block btn-lg waves-effect waves-light">
+                                                Table</button>
+                                            <button type="button" onclick="$(this).submitServiceType(1);"
+                                                class="btn btn-secondary btn-block btn-lg waves-effect waves-light">
+                                                Delivery</button>
+
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!--  Modal content for the above example -->
             <div id="paymentModel" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
                 aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
@@ -957,17 +988,23 @@
                 </div>
             </div>
 
-            <div id='resetModal' class='modal fade bs-example-modal-sm ' tabindex='-1' role='dialog' aria-labelledby='mySmallModalLabel' aria-hidden='true' style='display:none;'>
-              <div class='modal-dialog modal-md'>
-                <div class='modal-content'>
-                  <div class='modal-header'><h1> Type your password</h1></div>
-                  <div class='modal-body'>
-                    <form id="resetForm">
-        <div class="form-group"><input type="password" placeholder="Password" name="password" class="form-control"></div>
-        <div class="form-group"><input type="submit" class="btn btn-block btn-default" value="Enter"></div></form>
-                  </div>
+            <div id='resetModal' class='modal fade bs-example-modal-sm ' tabindex='-1' role='dialog'
+                aria-labelledby='mySmallModalLabel' aria-hidden='true' style='display:none;'>
+                <div class='modal-dialog modal-md'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <h1> Type your password</h1>
+                        </div>
+                        <div class='modal-body'>
+                            <form id="resetForm">
+                                <div class="form-group"><input type="password" placeholder="Password" name="password"
+                                        class="form-control"></div>
+                                <div class="form-group"><input type="submit" class="btn btn-block btn-default"
+                                        value="Enter"></div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-              </div>
 
             </div>
 

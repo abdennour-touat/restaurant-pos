@@ -242,7 +242,6 @@ if (auth == undefined) {
         $("#categories").html(
           `<button type="button" id="all" class="btn btn-categories btn-white waves-effect waves-light">All</button> `
         );
-        console.log(data);
 
         data.forEach((item) => {
           if (!categories.includes(item.category)) {
@@ -408,7 +407,6 @@ if (auth == undefined) {
       });
     }
     $("#skuCode").keydown(function (e) {
-      console.log("changed");
       barcodeSearch(e);
     });
     $("#searchBarCode").on("submit", function (e) {
@@ -599,10 +597,14 @@ if (auth == undefined) {
 
     $("#payButton").on("click", function () {
       if (cart.length != 0) {
-        $("#paymentModel").on("shown.bs.modal", function () {
-          $("#payment").focus();
-        });
-        $("#paymentModel").modal("toggle");
+
+
+        $("#servType").show()
+        $("#servType").modal("toggle")
+        // $("#paymentModel").on("shown.bs.modal", function () {
+        //   $("#payment").focus();
+        // });
+        // $("#paymentModel").modal("toggle");
       } else {
         Swal.fire("Oops!", "There is nothing to pay!", "warning");
       }
@@ -618,6 +620,31 @@ if (auth == undefined) {
 
     function printJobComplete() {
       alert("print job complete");
+    }
+    let tableNumber = 0;
+    let isTable = false;
+    $.fn.submitServiceType = function(type){
+      if(type == 0){
+        if(!$("#Table_Number").val() ){
+          Swal.fire("Please Enter Table Number")
+        }else{
+        tableNumber = $("#Table_Number").val();
+        isTable = true;
+        
+      $('#servType').modal("toggle")
+        $("#paymentModel").on("shown.bs.modal", function () {
+          $("#payment").focus();
+        });
+        $("#paymentModel").modal("toggle");
+        }
+      }else{
+        isTable = false;
+      $('#servType').modal("toggle")
+        $("#paymentModel").on("shown.bs.modal", function () {
+          $("#payment").focus();
+        });
+        $("#paymentModel").modal("toggle");
+      }
     }
 
     $.fn.submitDueOrder = function (status) {
@@ -773,6 +800,13 @@ if (auth == undefined) {
                   discount > 0
                     ? settings.symbol + parseFloat(discount).toFixed(2)
                     : ""
+                }</td>
+            </tr>
+            <tr>
+                <td>TO</td>
+                <td>:</td>
+                <td>${
+                  isTable?'Table number: ' + tableNumber: "delivery"
                 }</td>
             </tr>
             
@@ -1231,7 +1265,6 @@ if (auth == undefined) {
           return $(this).val() == allProducts[index].category;
         })
         .prop("selected", true);
-      console.log(allProducts[index]);
       $("#productName").val(allProducts[index].name);
       $("#product_price").val(allProducts[index].price);
       $("#quantity").val(allProducts[index].quantity);
@@ -1990,7 +2023,6 @@ function loadSoldProducts() {
     let product = allProducts.filter(function (selected) {
       return selected._id == item.id;
     });
-    console.log(product);
 
     counter++;
     sold_list += `<tr>

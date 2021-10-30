@@ -4,11 +4,7 @@ const Store = require("electron-store");
 Store.initRenderer();
 
 const server = require("./server");
-const {
-  app,
-  BrowserWindow,
-  ipcMain,
-} = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 require("@electron/remote/main").initialize();
 const contextMenu = require("electron-context-menu");
@@ -19,7 +15,7 @@ function createWindow() {
     // height: 768,
     // minWidth: 100,
     // minHeight: 750,
-    frame: false,
+    frame: true,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
@@ -31,7 +27,7 @@ function createWindow() {
   mainWindow.maximize();
   mainWindow.show();
   require("@electron/remote/main").enable(mainWindow.webContents);
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   mainWindow.loadURL(`file://${path.join(__dirname, "index.html")}`);
 
