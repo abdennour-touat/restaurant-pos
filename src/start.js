@@ -27,7 +27,7 @@ function createWindow() {
   mainWindow.maximize();
   mainWindow.show();
   require("@electron/remote/main").enable(mainWindow.webContents);
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   mainWindow.loadURL(`file://${path.join(__dirname, "index.html")}`);
 

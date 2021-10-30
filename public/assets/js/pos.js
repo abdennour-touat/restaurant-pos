@@ -248,9 +248,8 @@ if (auth == undefined) {
             categories.push(item.category);
           }
           let item_info = `<div class="col-lg-2 box ${item.category}"
-                                onclick="$(this).addToCart(${item._id}, ${
-            item.quantity
-          }, ${item.stock})">
+                                onclick="$(this).addToCart(${item._id},
+          10000000,1000000)">
                             <div class="widget-panel widget-style-2 ">                    
                             <div id="image"><img src="${
                               item.img == ""
@@ -262,14 +261,6 @@ if (auth == undefined) {
                                           item.name
                                         }</div> 
                                         <span class="sku">  ${item._id}</span>
-                                        <span class='stock' style='font-size: 12px;'>SIZE   ${
-                                          item.size
-                                        }</span><br>
-                                        <span class="stock">STOCK </span><span class="count">${
-                                          item.stock == 1
-                                            ? item.quantity
-                                            : "N/A"
-                                        }</span></div>
                                         <sp class="text-success text-center"><b data-plugin="counterup">${
                                           settings.symbol + item.price
                                         }</b> </sp>
@@ -322,23 +313,26 @@ if (auth == undefined) {
     }
 
     $.fn.addToCart = function (id, count, stock) {
-      if (stock == 1) {
-        if (count > 0) {
-          $.get(api + "inventory/product/" + id, function (data) {
-            $(this).addProductToCart(data);
-          });
-        } else {
-          Swal.fire(
-            "Out of stock!",
-            "This item is currently unavailable",
-            "info"
-          );
-        }
-      } else {
         $.get(api + "inventory/product/" + id, function (data) {
           $(this).addProductToCart(data);
         });
-      }
+      // if (stock == 1) {
+      //   // if (count > 0) {
+      //   //   // $.get(api + "inventory/product/" + id, function (data) {
+      //   //   //   $(this).addProductToCart(data);
+      //   //   // });
+      //   // } else {
+      //   //   Swal.fire(
+      //   //     "Out of stock!",
+      //   //     "This item is currently unavailable",
+      //   //     "info"
+      //   //   );
+      //   // }
+      // } else {
+      //   $.get(api + "inventory/product/" + id, function (data) {
+      //     $(this).addProductToCart(data);
+      //   });
+      // }
     };
 
     function barcodeSearch(e) {
@@ -365,9 +359,9 @@ if (auth == undefined) {
             $("#basic-addon2").append(
               $("<i>", { class: "glyphicon glyphicon-ok" })
             );
-          } else if (data.quantity < 1) {
+          } else if (data.quantity > 1) {
             Swal.fire(
-              "Out of stock!",
+              "Out of stock! fuck",
               "This item is currently unavailable",
               "info"
             );
@@ -542,21 +536,21 @@ if (auth == undefined) {
         return selected._id == parseInt(item.id);
       });
 
-      if (product[0].stock == 1) {
-        if (item.quantity < product[0].quantity) {
-          item.quantity += 1;
-          $(this).renderTable(cart);
-        } else {
-          Swal.fire(
-            "No more stock!",
-            "You have already added all the available stock.",
-            "info"
-          );
-        }
-      } else {
         item.quantity += 1;
         $(this).renderTable(cart);
-      }
+      // if (product[0].stock == 1) {
+      //   if (item.quantity < product[0].quantity) {
+      //     item.quantity += 1;
+      //     $(this).renderTable(cart);
+      //   } else {
+      //     Swal.fire(
+      //       "No more stock!",
+      //       "You have already added all the available stock.",
+      //       "info"
+      //     );
+      //   }
+      // } else {
+      // }
     };
 
     $.fn.qtDecrement = function (i) {
@@ -601,6 +595,9 @@ if (auth == undefined) {
 
         $("#servType").show()
         $("#servType").modal("toggle")
+        $("#Table_Number").val("");
+        $("#Table_Number").focus();
+        
         // $("#paymentModel").on("shown.bs.modal", function () {
         //   $("#payment").focus();
         // });
@@ -2327,7 +2324,6 @@ $("body").on("submit", "#account", function (e) {
     });
   }
 });
-console.log(user);
 $("#resetModal").on("submit", function (e) {
   e.preventDefault();
   let formData = $("#resetForm").serializeObject();
